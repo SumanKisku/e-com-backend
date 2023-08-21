@@ -14,8 +14,9 @@ const handleSignup = require("./routes/handleSignup.js");
 const port = process.env.PORT || 3001;
 const notice = clc.blue;
 const warning = clc.red;
+const dbUsername = process.env.MONGO_USERNAME; // mongodb username
 const dbPwd = process.env.MONGO_PASSWORD; // mongodb password
-const MONGO_URI = `mongodb+srv://sumankisku:${dbPwd}@cluster0.7nxa6go.mongodb.net/e-commerce`;
+const MONGO_URI = `mongodb+srv://${dbUsername}:${dbPwd}@cluster0.7nxa6go.mongodb.net/e-commerce`;
 
 
 // middlewares
