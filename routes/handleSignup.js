@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 const { validationResult, matchedData } = require("express-validator");
-const User = require("../models/User");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+
+// Models import
+const User = require("../models/User");
 
 const handleSignup = async (req, res) => {
   const result = validationResult(req);
@@ -23,18 +25,18 @@ const handleSignup = async (req, res) => {
     try {
       const userDb = await user.save()
       return res.send({
-        msg: "Account registered successfully!",
+        message: "Account registered successfully!",
         code: "registered",
       });
     } catch (error) {
       if(error.keyPattern.hasOwnProperty('email')) {
         return res.send({
-          msg:"Account already exists with this email.",
+          message:"Account already exists with this email.",
           code: "emailExists",
         });
       } else if(error.keyPattern.hasOwnProperty('username')) {
         return res.send({
-          msg: "Account already exists with this username.",
+          message: "Account already exists with this username.",
           code: "usernameExists",
         });
       }
