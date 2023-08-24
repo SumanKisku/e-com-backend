@@ -15,8 +15,7 @@ const handleSignup = require("./routes/handleSignup.js");
 const handleLogin = require("./routes/handleLogin.js");
 
 // variables
-const port = process.env.PORT || 3001;
-const ipAddress = process.env.IPADDRESS || '192.168.29.126';
+const port = process.env.PORT || 3005;
 const notice = clc.blue;
 const warning = clc.red;
 const dbUsername = process.env.MONGO_USERNAME; // mongodb username
@@ -36,8 +35,8 @@ store.on('error', function (error) {
 
 // app was not storing without this options
 const corsOptions = {
-    origin: 'http://192.168.29.126:3000', // Replace with your React app's URL
-    credentials: true,
+  origin: 'http://192.168.29.126:3000', // Replace with your React app's URL
+  credentials: true,
 };
 
 // middlewares
@@ -74,6 +73,6 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.listen(port, ipAddress, () => {
-  console.log(notice.blue.bold(`App is running on `), notice.blue.bold.underline(`http://${ipAddress}:${port}`));
+app.listen(port, () => {
+  console.log(notice.blue.bold(`App is running on `), notice.blue.bold.underline(`http://localhost:${port}`));
 })
