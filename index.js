@@ -13,6 +13,8 @@ require("dotenv").config();
 // routes import
 const handleSignup = require("./routes/handleSignup.js");
 const handleLogin = require("./routes/handleLogin.js");
+const isAuth = require("./middlewares/isAuth.js");
+const handleLogout = require("./routes/handleLogout.js");
 
 // variables
 const port = process.env.PORT || 3005;
@@ -35,7 +37,7 @@ store.on('error', function (error) {
 
 // app was not storing without this options
 const corsOptions = {
-  origin: 'http://192.168.29.126:3000', // Replace with your React app's URL
+  origin: 'http://localhost:5173', // Replace with your React app's URL
   credentials: true,
 };
 
@@ -68,6 +70,8 @@ app.post('/signup', body(['name', 'username', 'email', 'password', 'confirmPassw
 // login
 app.post('/login', body(['emailOrUsername', 'password']).notEmpty(), handleLogin);
 
+// logout
+app.post('/logout', isAuth, handleLogout);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

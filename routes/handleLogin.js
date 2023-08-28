@@ -18,7 +18,6 @@ const handleLogin = async (req, res) => {
         }
 
         if(!userDb) {
-            console.log("Account not found!");
             return res.send({
                 status: 401,
                 message: "No account found",
@@ -36,14 +35,15 @@ const handleLogin = async (req, res) => {
             })
         }
 
-        //  session 'isAuth' set to true
+        //  setting session
         req.session.isAuth = true;
         req.session.user = {
             username: userDb.username,
             email: userDb.email,
             userId: userDb._id
         }
-
+        // console.log("login", res.session.isAuth);
+        // console.log("login", req.session.user);
         return res.send({
             status: 200,
             message: "Logged in successfully!",
